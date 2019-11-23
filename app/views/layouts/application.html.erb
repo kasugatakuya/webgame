@@ -9,6 +9,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class= "head">
+      <div class= "title">
+        メソッド道場
+      </div>
+      <div class="icon">
+        <%= link_to "メソ打ち", '/posts', class: "icon1" %>
+        <%= link_to "クイズ", '/', class: "icon2" %>
+        <%= link_to "ホーム", '/', class: "icon3" %>
+      </div>
+    </div>
+    <div class="form">
+      <div class="link">
+        <a href= "https://www.facebook.com" class="face" ><i class="fab fa-facebook-square"></i></a>
+        <a href= "https://twitter.com" class="twitter" ><i class="fab fa-twitter-square"></i></a>
+        <a href= "https://www.instagram.com" class="insta" ><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="contents">
+      <%= yield %>
+    </div>
   </body>
 </html>
