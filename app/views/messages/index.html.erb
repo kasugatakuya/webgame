@@ -1,93 +1,137 @@
-<body>
-  <div class="main">
-    <img id="main">
-
-    <nav>
-      <ul>
-        <li id="play">Play</li>
-        <li id="prev">&lt;</li>
-        <li id="next">&gt;</li>
-      </ul>
-    </nav>
-    <ul class="thumbnails"></ul>
-  </div>
+<div class="main">
+  <p id="target">メソ打ち！<br>〜クリックで開始〜</p>
+  <p class="info">
+    正解数: <span id= "score">0</span>
+    ミス数: <span id= "miss">0</span>
+    残り時間: <span id= "timer">0.00</span>
+  </p>
+  </p>
   <script>
-    'use strict';
+  'use strict'
 
 {
-  const images = [
-    'img/pic00.png',
-    'img/pic01.png',
-    'img/pic02.png',
-    'img/pic03.png',
-    'img/pic04.png',
-    'img/pic05.png',
-    'img/pic06.png',
-    'img/pic07.png',
+  const words = [
+    'ruby',
+    'javascript',
+    'jquery',
+    'rails',
+    'python',
+    'div',
+    'console.log',
+    'hello world',
+    'bundle install',
+    'document',
+    'puts',
+    'while',
+    'unity',
+    'body',
+    'head',
+    'let',
+    'function',
+    'string',
+    'import',
+    'before_action',
+    'has_many',
+    'belongs_to',
+    'input',
+    'label',
+    'render',
+    'create',
+    'index',
+    'remove',
+    'require',
+    'application',
+    'padding',
+    'resources',
+    'form_with',
+
   ];
-  let currentIndex = 0;
+  let word;
+  let loc;
+  let score;
+  let miss;
+  const timeLimit = 5 * 1000;
+  let startTime;
+  let isPlaying = false
 
-  const mainImage = document.getElementById('main');
-  mainImage.src = images[currentIndex];
+  const target = document.getElementById('target');
+  const scoreLabel = document.getElementById('score');
+  const missLabel = document.getElementById('miss');
+  const timerLabel = document.getElementById('timer');
 
-  images.forEach((image, index) => {
-    const img = document.createElement('img');
-    img.src = image;
+  
 
-    const li = document.createElement('li');
-    if (index === currentIndex) {
-      li.classList.add('current');
+  function updateTarget() {
+    let placeholder = '';
+    for (let i = 0; i <loc; i++) {
+      placeholder += '*';
     }
-    li.addEventListener('click', () => {
-      mainImage.src = image;
-      const thumbnails = document.querySelectorAll('.thumbnails > li');
-      thumbnails[currentIndex].classList.remove('current');
-      currentIndex = index;
-      thumbnails[currentIndex].classList.add('current')
-    })
-    li.appendChild(img);
-    document.querySelector('.thumbnails').appendChild(li);
-  });
-
-  const next = document.getElementById('next');
-  next.addEventListener('click', () => {
-    let target = currentIndex + 1;
-    if (target === images.length) {
-      target = 0;
-    }
-    document.querySelectorAll('.thumbnails > li')[target].click();
-  })
-  const prev = document.getElementById('prev');
-  prev.addEventListener('click', () => {
-    let target = currentIndex - 1;
-    if (target < 0) {
-      target = images.length - 1;
-    }
-    document.querySelectorAll('.thumbnails > li')[target].click();
-  });
-
-  let timeoutId;
-
-  function playSlideshow() {
-    next.click();
-    timeoutId = setTimeout(() => {
-      playSlideshow();
-    }, 1000);
+    target.textContent = placeholder + word.substring(loc);
   }
 
-  let isPlaying = false;
+  function updateTimer() {
+    const timeLeft = startTime + timeLimit - Date.now();
+    timerLabel.textContent = (timeLeft / 1000).toFixed(2);
 
-  const play = document.getElementById('play');
-  play.addEventListener('click', () => {
-    if (isPlaying === false) {
-      playSlideshow();
-      play.textContent = 'Pause';
-    } else {
+    const timeoutId = setTimeout(() => {
+      updateTimer();
+    }, 10);
+
+    if (timeLeft < 0) {
+      isPlaying = false;
+
       clearTimeout(timeoutId);
-      play.textContent = 'Play';
+      timerLabel.textContent = '0.00';
+      setTimeout(() => {
+        showResult();
+      }, 100);
+
+      target.textContent = '〜クリックで開始〜';
     }
-    isPlaying = !isPlaying;
+  }
+
+  
+
+  window.addEventListener('click', () => {
+    if (isPlaying ===true) {
+      return;
+    }
+    isPlaying = true;
+
+    loc = 0;
+    score = 0;
+    miss = 0;
+    scoreLabel.textContent = score;
+    missLabel.textContent = miss;
+    word = words[Math.floor(Math.random() * words.length)];
+
+    target.textContent = word;
+    startTime = Date.now();
+    updateTimer();
+  });
+
+
+  window.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    if (isPlaying !== true) {
+      return;
+    }
+    if (e.key === word[loc]) {
+      console.log('score');
+      loc++;
+      if (loc === word.length) {
+        word = words[Math.floor(Math.random() * words.length)];
+        loc = 0;
+      }
+      updateTarget();
+      score++;
+      scoreLabel.textContent = score;
+    } else {
+      console.log('miss');
+      miss++;
+      missLabel.textContent = miss;
+    }
   });
 }
   </script>
-</body>
+</div>
