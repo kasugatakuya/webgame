@@ -1,7 +1,7 @@
 # README　このアプリについて
 ***
 
-## :bamboo:川柳縛りとは
+## :bamboo:プログラミング道場とは
 プログラミング上達サイト
 <br></br>
 プログラミングやIT系のクイズが楽しめる。
@@ -29,7 +29,7 @@
 
 ![25df3617974ad024d4a8bc7257c50541](https://user-images.githubusercontent.com/57311079/72197797-dac7ed00-3468-11ea-8cf0-7a35e3cd6234.gif)
 
-<h2 align="center">〜三択クイズクイズ〜</h2>
+<h2 align="center">〜三択クイズ〜</h2>
 <p align="center">JavaScriptで作った三択クイズ。プログラミングやIT関連の三択クイズが楽しめる。ドットインストールを参考</p>
 
 ![328337ed21d3a60dadc63d765953fb19](https://user-images.githubusercontent.com/57311079/72197872-a9035600-3469-11ea-9297-5425cac90000.gif)
