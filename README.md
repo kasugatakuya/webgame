@@ -12,13 +12,13 @@ javaScriptで様々なゲームを作れる様になりたいので、もっと�
 
 ## :memo:概要
 * アプリ名：プログラミング道場
-使用言語：HTML/CSS/Ruby/Rails/JavaScript/AWS/Github/Visual Studio Code
+使用言語：HTML/CSS/Ruby/Rails/JavaScript/heroku/Github/Visual Studio Code
 * 機能：タイピングゲーム・クイズ
 * 作業人数：1人（個人制作）
 * 作業期間：約４日
 
 ## :earth_africa:URL
-### URL：[http://18.176.29.121/](http://18.176.29.121/)
+### URL：[https://webgame001.herokuapp.com/](https://webgame001.herokuapp.com/)
 
 ## :computer:機能詳細
 
